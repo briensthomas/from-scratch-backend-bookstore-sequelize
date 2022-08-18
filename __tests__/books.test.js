@@ -39,6 +39,7 @@ describe('backend-express-template routes', () => {
         }
       ]);
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.log(err);
     }
   });
@@ -76,4 +77,22 @@ describe('backend-express-template routes', () => {
       }
     ]);
   });
+
+  it('#GET /books/:id should return a status 200', async () => {
+    const res = await request(app).get('/api/v1/books/2');
+    expect(res.status).toBe(200);
+  });
+
+  it('#GET /books/:id should return a specific book', async () => {
+    const res = await request(app).get('/api/v1/books/2');
+
+    expect(res.body).toEqual({
+      title: 'Dreadgod',
+      genre: 'Fantasy',
+      releasedYear: 2022,
+      authorId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+  }); 
 });
