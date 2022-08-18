@@ -6,7 +6,7 @@ describe('backend-express-template routes', () => {
   beforeEach(async () => {
     await db.sequelize.sync({ force: true });
     try {
-      await db.Authors.bulkCreate([
+      await db.Author.bulkCreate([
         {
           firstName: 'Bryce',
           lastName: 'O\'Connor',
@@ -20,12 +20,12 @@ describe('backend-express-template routes', () => {
           updatedAt: new Date(),
         }
       ]);
-      await db.Books.bulkCreate([
+      await db.Book.bulkCreate([
         {
           title: 'Iron Prince',
           genre: 'Fantasy',
           releasedYear: 2020,
-          authorId: 2,
+          authorId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -33,7 +33,7 @@ describe('backend-express-template routes', () => {
           title: 'Dreadgod',
           genre: 'Fantasy',
           releasedYear: 2022,
-          authorId: 3,
+          authorId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         }
@@ -61,7 +61,7 @@ describe('backend-express-template routes', () => {
         title: 'Iron Prince',
         genre: 'Fantasy',
         releasedYear: 2020,
-        authorId: 2,
+        authorId: 1,
         createdAt: expect.any(String),
         updatedAt:expect.any(String),
       },
@@ -70,7 +70,7 @@ describe('backend-express-template routes', () => {
         title: 'Dreadgod',
         genre: 'Fantasy',
         releasedYear: 2022,
-        authorId: 3,
+        authorId: 2,
         createdAt: expect.any(String),
         updatedAt:expect.any(String),
       }
