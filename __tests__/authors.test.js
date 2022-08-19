@@ -68,4 +68,17 @@ describe('backend-express-template routes', () => {
       }
     ]);
   });
+
+  it('#GET /authors/:id returns a status 200 and a specific author', async () => {
+    const res = await request(app).get('/api/v1/authors/1');
+
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: expect.any(Number),
+      firstName: 'Bryce',
+      lastName: 'O\'Connor',
+      createdAt: expect.any(String),
+      updatedAt:expect.any(String),
+    });
+  });
 });
