@@ -99,4 +99,26 @@ describe('backend-express-template routes', () => {
       updatedAt:expect.any(String),
     });
   });
+
+  it('#POST /authors/:id/books user should be able to add a new book', async () => {
+    const newBook = {
+      title: 'Reaper',
+      genre: 'Fantasy',
+      releasedYear: 2021,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    const res = await request(app).post('/api/v1/authors/2/book').send(newBook);
+    console.log('res.body', res.body);
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: expect.any(Number),
+      title: 'Reaper',
+      genre: 'Fantasy',
+      releasedYear: 2021,
+      authorId: 2,
+      createdAt: expect.any(String),
+      updatedAt:expect.any(String),
+    });
+  });
 });
