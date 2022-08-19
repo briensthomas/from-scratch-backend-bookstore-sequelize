@@ -79,6 +79,24 @@ describe('backend-express-template routes', () => {
       lastName: 'O\'Connor',
       createdAt: expect.any(String),
       updatedAt:expect.any(String),
+      Books: expect.any(Object)
+    });
+  });
+
+  it('#POST /authors user can add a new author', async () => {
+    const newAuthor = {
+      firstName: 'Brandon',
+      lastName: 'Sanderson',
+    };
+    const res = await request.agent(app).post('/api/v1/authors').send(newAuthor);
+
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: expect.any(Number),
+      firstName: 'Brandon',
+      lastName: 'Sanderson',
+      createdAt: expect.any(String),
+      updatedAt:expect.any(String),
     });
   });
 });
