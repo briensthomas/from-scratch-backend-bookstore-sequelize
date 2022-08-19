@@ -47,54 +47,25 @@ describe('backend-express-template routes', () => {
     await db.sequelize.close();
   });
 
-  it('#GET /books returns a status 200', async () => {
-    const res = await request(app).get('/api/v1/books');
+  it('#GET /authors returns a status 200 and all authors', async () => {
+    const res = await request(app).get('/api/v1/authors');
+    
     expect(res.status).toBe(200);
-  });
-
-  it('#GET /books should return a list of two books', async () => {
-    const res = await request(app).get('/api/v1/books');
-
-    expect(res.body.length).toBe(2);
     expect(res.body).toEqual([
       {
         id: expect.any(Number),
-        title: 'Iron Prince',
-        genre: 'Fantasy',
-        releasedYear: 2020,
-        authorId: 1,
+        firstName: 'Bryce',
+        lastName: 'O\'Connor',
         createdAt: expect.any(String),
         updatedAt:expect.any(String),
       },
       {
         id: expect.any(Number),
-        title: 'Dreadgod',
-        genre: 'Fantasy',
-        releasedYear: 2022,
-        authorId: 2,
+        firstName: 'Will',
+        lastName: 'Wight',
         createdAt: expect.any(String),
         updatedAt:expect.any(String),
       }
     ]);
   });
-
-  it('#GET /books/:id should return a status 200', async () => {
-    const res = await request(app).get('/api/v1/books/2');
-
-    expect(res.status).toBe(200);
-  });
-
-  it('#GET /books/:id should return a specific book', async () => {
-    const res = await request(app).get('/api/v1/books/2');
-    expect(res.body).toEqual({
-      id: expect.any(Number),
-      title: 'Dreadgod',
-      genre: 'Fantasy',
-      releasedYear: 2022,
-      authorId: 2,
-      createdAt: expect.any(String),
-      updatedAt:expect.any(String),
-      Author: expect.any(Object)
-    });
-  }); 
 });
